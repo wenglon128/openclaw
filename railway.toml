@@ -1,0 +1,11 @@
+[deploy]
+startCommand = "bash -lc 'set -euo pipefail; \
+  echo \"[boot] OPENCLAW_STATE_DIR=${OPENCLAW_STATE_DIR:-}\"; \
+  echo \"[boot] OPENCLAW_DATA_DIR=${OPENCLAW_DATA_DIR:-}\"; \
+  npx --no-install openclaw config set gateway.mode local; \
+  npx --no-install openclaw config set plugins.entries.slack.enabled true; \
+  npx --no-install openclaw config set agents.defaults.model.primary \"google/gemini-2.0-flash\"; \
+  npx --no-install openclaw config set channels.slack.dm.policy \"allowlist\"; \
+  npx --no-install openclaw config set channels.slack.dm.allowFrom \"[\\\"U0ACY66SZ0U\\\"]\"; \
+  node dist/entry.js gateway --allow-unconfigured \
+'"
