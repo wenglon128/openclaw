@@ -1,5 +1,5 @@
 [deploy]
-startCommand = "node dist/entry.js gateway --port $PORT --bind lan --allow-unconfigured"
+startCommand = "sh -lc 'set -e; \
   echo \"[boot] OPENCLAW_STATE_DIR=${OPENCLAW_STATE_DIR:-}\"; \
   echo \"[boot] OPENCLAW_DATA_DIR=${OPENCLAW_DATA_DIR:-}\"; \
   npx --no-install openclaw config set gateway.mode local; \
@@ -7,5 +7,6 @@ startCommand = "node dist/entry.js gateway --port $PORT --bind lan --allow-uncon
   npx --no-install openclaw config set agents.defaults.model.primary \"google/gemini-2.0-flash\"; \
   npx --no-install openclaw config set channels.slack.dm.policy \"allowlist\"; \
   npx --no-install openclaw config set channels.slack.dm.allowFrom \"[\\\"U0ACY66SZ0U\\\"]\"; \
-  node dist/entry.js gateway --allow-unconfigured \
+  exec node dist/entry.js gateway --port ${PORT:-8080} --bind lan --allow-unconfigured \
 '"
+
