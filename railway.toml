@@ -1,5 +1,5 @@
 [deploy]
-startCommand = "bash -lc 'set -euo pipefail; \
+startCommand = "node dist/entry.js gateway --port $PORT --bind lan --allow-unconfigured"
   echo \"[boot] OPENCLAW_STATE_DIR=${OPENCLAW_STATE_DIR:-}\"; \
   echo \"[boot] OPENCLAW_DATA_DIR=${OPENCLAW_DATA_DIR:-}\"; \
   npx --no-install openclaw config set gateway.mode local; \
